@@ -21,19 +21,20 @@ document.getElementById('js-question').textContent = question;
 // document.getElementsByTagName('button')[3].textContent = answers[3];
 
 
-const button =document.getElementsByTagName('button');
+//HTMLのオブジェクトを取ってくる場合、「$」を入れる
+const $button =document.getElementsByTagName('button');
 
-button[0].textContent = answers[0];
-button[1].textContent = answers[1];
-button[2].textContent = answers[2];
-button[3].textContent = answers[3];
+$button[0].textContent = answers[0];
+$button[1].textContent = answers[1];
+$button[2].textContent = answers[2];
+$button[3].textContent = answers[3];
 
 
 
 //ボタンをクリックしたら正誤判定
 //文字列を比較して一致するかどうかをみる場合は「===」を使う
-document.getElementsByTagName('button')[0].addEventListener('click', ()=> {
-　if(correct === document.getElementsByTagName('button')[0].textContent){
+$button[0].addEventListener('click', ()=> {
+　if(correct === $button[0].textContent){
     window.alert('正解！')
   } else {
     window.alert('不正解！')
