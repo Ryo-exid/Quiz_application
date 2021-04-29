@@ -29,20 +29,19 @@ const quiz = [
   }
 ];
 
-const quizLength = quiz.length;
-let quizIndex = 0;
+const quizLength = quiz.length;　//問題数
+let quizIndex = 0; //今何問目か数える変数
+let score = 0;
 
 
+const $button = document.getElementsByTagName('button');　//documentはHTMLに反映させる　//HTMLのオブジェクトを取ってくる場合、「$」を入れる
+const buttonLength = $button.length;　//buttonの数（問題数が変わっても良いように柔軟性を持たせる）
 
-
-
-const $button =document.getElementsByTagName('button');
-const buttonLength = $button.length;
 
 //クイズの問題文、選択肢を定義
 const setupQuiz = ()=> {
-  document.getElementById('js-question').textContent = quiz[quizIndex].question;
-  let buttonIndex = 0;
+  document.getElementById('js-question').textContent = quiz[quizIndex].question;　//textContentはHTMLタグが持っているテキスト情報を取得するプロパティ
+  let buttonIndex = 0;　//buttonIndexはbuttonを数える変数
   while(buttonIndex < buttonLength){
     //ここに命令
     $button[buttonIndex].textContent = quiz[quizIndex].answers[buttonIndex];
@@ -53,9 +52,11 @@ const setupQuiz = ()=> {
 setupQuiz();
 
 
+//「e」はイベントのオブジェクト,targetはクリックされたボタンのこと。//clickHandlerはクリックされたら動く関数として定義。
 const clickHandler = (e) => {
   if(quiz[quizIndex].correct === e.target.textContent){
     window.alert('正解！')
+    score++;
   } else {
     window.alert('不正解！')
   }
@@ -67,12 +68,12 @@ const clickHandler = (e) => {
     setupQuiz();
   } else {
     //問題数がもう無ければこちらを実行
-    window.alert('終了！')
+    window.alert('終了！あなたの正解数は' + score + '/' + quizLength + '問です！')
   }
 };
 
 
-//ボタンをクリックしたら正誤判定
+//手順⑤　（手順④をリファクタリング）
 let handlerIndex = 0;
 while (handlerIndex < buttonLength) {
   $button[handlerIndex].addEventListener('click', (e)=> {
